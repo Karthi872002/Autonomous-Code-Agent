@@ -1,14 +1,8 @@
 from langchain.agents import create_agent
-from langchain_nvidia_ai_endpoints import ChatNVIDIA
-from langchain_groq import ChatGroq
 from langchain_core.language_models import BaseChatModel
-from sqlalchemy import event
-import json
 
 from app.agents.prompts import SYSTEM_PROMPT
-from app.config.config_loader import AGENT_CONFIG
 from app.context.runtime import RuntimeContext
-from app.config.agent_config import AgentConfig
 from app.tools.github_mcp import GitHubMCP, wrap_github_tools
 from app.agents.model_factory import create_model
 from app.models.review import CodeReview
@@ -42,8 +36,6 @@ class Agent:
         context_schema=RuntimeContext,
         response_format=CodeReview,
         )
-
-
 
     async def analyze_code(
     self,
